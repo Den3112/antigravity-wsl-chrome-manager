@@ -1,4 +1,4 @@
-# Welcome to the WSL-Chrome-Bridge Wiki!
+# Welcome to the Antigravity WSL Chrome Manager Wiki!
 
 This repository provides robust solutions for running Google Chrome in Windows Subsystem for Linux (WSL), specifically tailored for automation agents like **Antigravity**, **Playwright**, and **Puppeteer**.
 
