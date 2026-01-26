@@ -1,0 +1,12 @@
+name: Documentation
+on: [pull_request, push]
+jobs:
+  lint-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Markdown
+        uses: DavidAnson/github-lint-action@v1
+        with:
+          glob: '**/*.md'
+          ignore: 'node_modules/**'
