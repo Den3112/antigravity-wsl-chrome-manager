@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Thank you for considering contributing to WSL Antigravity Chrome Solutions! 🎉
+Thank you for considering contributing to Antigravity WSL Chrome Manager! 🎉
 
 ## 📋 Table of Contents
 
@@ -52,7 +52,7 @@ We welcome PRs for:
 
 ```bash
 # Fork and clone
-git clone https://github.com/YOUR-USERNAME/wsl-chrome-bridge.git
+git clone https://github.com/Den3112/antigravity-wsl-chrome-manager.git
 cd antigravity-wsl-chrome-manager
 
 # Test Solution 1
@@ -201,8 +201,8 @@ See [SECURITY.md](SECURITY.md) for:
 
 ## ❓ Questions?
 
-- 💬 [GitHub Discussions](https://github.com/YOUR-USERNAME/wsl-chrome-bridge/discussions)
-- 🐛 [Issues](https://github.com/YOUR-USERNAME/wsl-chrome-bridge/issues)
+- 💬 [GitHub Discussions](https://github.com/Den3112/antigravity-wsl-chrome-manager/discussions)
+- 🐛 [Issues](https://github.com/Den3112/antigravity-wsl-chrome-manager/issues)
 
 ## 🌟 Recognition
 

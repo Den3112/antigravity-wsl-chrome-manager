@@ -65,7 +65,7 @@ This bridge uses a **dual-proxy architecture**:
 
 ### 2. WSL Setup
 ```bash
-git clone https://github.com/Den3112/wsl-chrome-bridge.git
+git clone https://github.com/Den3112/antigravity-wsl-chrome-manager.git
 cd antigravity-wsl-chrome-manager
 chmod +x setup.sh
 ./setup.sh
@@ -125,9 +125,9 @@ const browser = await chromium.connectOverCDP('http://127.0.0.1:9222');
 | `Timeout` | Check if your AV is blocking `python.exe` |
 | `Path errors` | Update `WINDOWS_PROXY_PATH` in `start_bridge.sh` |
 
-📚 See the [Wiki](https://github.com/Den3112/wsl-chrome-bridge/wiki) for detailed documentation.
+📚 See the [Wiki](https://github.com/Den3112/antigravity-wsl-chrome-manager/wiki) for detailed documentation.
 
-💬 Join the [Discussions](https://github.com/Den3112/wsl-chrome-bridge/discussions) to ask questions or share your setup!
+💬 Join the [Discussions](https://github.com/Den3112/antigravity-wsl-chrome-manager/discussions) to ask questions or share your setup!
 
 ---
 

@@ -298,6 +298,6 @@ pkill socat
 
 ## Still have questions?
 
-- 🐛 Bug reports: [GitHub Issues](https://github.com/YOUR-USERNAME/wsl-chrome-bridge/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/YOUR-USERNAME/wsl-chrome-bridge/discussions)
+- 🐛 Bug reports: [GitHub Issues](https://github.com/Den3112/antigravity-wsl-chrome-manager/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/Den3112/antigravity-wsl-chrome-manager/discussions)
 - 📖 Documentation: [README.md](README.md)
