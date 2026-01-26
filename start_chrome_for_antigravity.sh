@@ -41,7 +41,8 @@ rm -f "$USER_DATA_DIR/SingletonLock"
 # Ensure DISPLAY is set for GUI support
 export DISPLAY=:0
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
-export GALLIUM_DRIVER=d3d12
+# GPU settings are inherited from environment, but we ensure D3D12 is active
+export GALLIUM_DRIVER=${GALLIUM_DRIVER:-d3d12}
 
 echo "🚀 Starting Chrome for Antigravity..."
 echo "   Profile: $USER_DATA_DIR"
