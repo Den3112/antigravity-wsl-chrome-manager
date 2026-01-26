@@ -42,7 +42,6 @@ rm -f "$USER_DATA_DIR/SingletonLock"
 export DISPLAY=:0
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export GALLIUM_DRIVER=d3d12
-export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
 
 echo "🚀 Starting Chrome for Antigravity..."
 echo "   Profile: $USER_DATA_DIR"
