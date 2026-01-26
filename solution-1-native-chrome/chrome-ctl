@@ -1,82 +1,66 @@
-#!/bin/bash
+#! /bin/bash
 
 # =============================================================================
-# Quick commands for managing Antigravity Smart Proxy
+# Antigravity Smart Proxy Manager
 # =============================================================================
 
-# Determine directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) || exit"
 PROXY_SCRIPT="$SCRIPT_DIR/smart_chrome_proxy.py"
 LOG_FILE="/tmp/smart_proxy.log"
 
-PROXY_PID_CMD="pgrep -f smart_chrome_proxy.py"
-
 case "$1" in
     status)
-        echo "🔍 Checking Smart Proxy status..."
-        PID=$($PROXY_PID_CMD)
+        echo "🔍 Checking Antigravity Proxy..."
+        PID=$(pgrep -f "smart_chrome_proxy.py")
         if [ -n "$PID" ]; then
-            echo "✅ Smart Proxy is running (PID: $PID)"
-            echo "   Listening on port 9222 -> Chrome on 9223"
+            echo "✅ Smart Proxy is active (PID: $PID)"
+            echo "   Route: 127.0.0.1:9222 (Stealth Bridge) -> Proxy"
         else
             echo "❌ Smart Proxy is NOT running"
         fi
         
         echo ""
-        echo "🔍 Checking Chrome status..."
-        if curl -s --connect-timeout 2 http://127.0.0.1:9223/json/version > /dev/null 2>&1; then
-            echo "✅ Chrome is running on internal port 9223"
+        echo "🔍 Checking Chrome instances..."
+        # Check for any Chrome running under the Antigravity profile
+        CHROME_PIDS=$(pgrep -f "antigravity_chrome")
+        if [ -n "$CHROME_PIDS" ]; then
+             echo "✅ Chrome is running (Managed by Proxy)"
         else
-            echo "💤 Chrome is currently sleeping (will start on demand)"
+             echo "💤 Chrome is sleeping (Auto-starts on demand)"
         fi
         ;;
         
     start)
-        echo "🚀 Starting Smart Proxy..."
-        if [ -n "$($PROXY_PID_CMD)" ]; then
-            echo "⚠️  Already running."
+        if pgrep -f "smart_chrome_proxy.py" > /dev/null; then
+            echo "⚠️  Proxy is already running."
         else
+            echo "🚀 Starting Smart Proxy..."
             nohup python3 "$PROXY_SCRIPT" > "$LOG_FILE" 2>&1 &
-            echo "✅ Started."
+            echo "✅ Started background service."
         fi
         ;;
         
     stop)
-        echo "🛑 Stopping Smart Proxy and Chrome..."
+        echo "🛑 Stopping services..."
         pkill -f "smart_chrome_proxy.py" || true
-        pkill -f "chrome.*9223" 2>/dev/null || true
+        pkill -f "chrome.*antigravity" 2>/dev/null || true
         echo "✅ All stopped."
         ;;
         
     restart)
-        echo "🔄 Restarting Smart Proxy..."
-        pkill -f "smart_chrome_proxy.py" || true
+        echo "🔄 Restarting..."
+        $0 stop
         sleep 1
-        nohup python3 "$PROXY_SCRIPT" > "$LOG_FILE" 2>&1 &
-        echo "✅ Restarted."
+        $0 start
         ;;
         
     logs)
-        echo "📋 Smart Proxy logs (last 20 lines):"
-        echo "---"
-        tail -20 "$LOG_FILE" 2>/dev/null || echo "No logs"
+        echo "📋 Proxy Logs:"
+        tail -n 20 "$LOG_FILE" 2>/dev/null
         ;;
         
     *)
-        echo "Antigravity Smart Proxy - Management Tool"
-        echo ""
-        echo "Usage: chrome-ctl <command>"
-        echo ""
-        echo "Commands:"
-        echo "  status   - Check Proxy and Chrome status"
-        echo "  start    - Start the Smart Proxy"
-        echo "  stop     - Stop Proxy and Chrome"
-        echo "  restart  - Restart Proxy"
-        echo "  logs     - Show proxy logs"
-        echo ""
-        echo "ℹ️  Logic:"
-        echo "   • Proxy listens on 9222."
-        echo "   • Chrome runs on 9223 ONLY when needed."
-        echo "   • No more auto-restarting zombies!"
+        echo "Usage: chrome-ctl {status|start|stop|restart|logs}"
+        exit 1
         ;;
 esac

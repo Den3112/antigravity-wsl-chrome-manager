@@ -10,7 +10,7 @@ import re
 import json
 
 # Configuration
-LISTEN_HOST = '0.0.0.0'
+LISTEN_HOST = '127.0.0.1'
 LISTEN_PORT = 9222
 START_PORT_RANGE = 9300
 CHROME_START_SCRIPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'start_chrome_for_antigravity.sh')
