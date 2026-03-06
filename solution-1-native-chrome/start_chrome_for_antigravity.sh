@@ -55,7 +55,7 @@ nohup "$CHROME_BIN" \
   --remote-allow-origins='*' \
   --no-sandbox \
   --disable-dev-shm-usage \
-  --force-device-scale-factor=1.5 \
+  --force-device-scale-factor=2.0 \
   --window-size=1400,900 \
   --no-first-run \
   --no-default-browser-check \

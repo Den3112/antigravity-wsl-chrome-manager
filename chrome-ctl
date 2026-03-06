@@ -34,9 +34,13 @@ case "$1" in
         if pgrep -f "smart_chrome_proxy.py" > /dev/null; then
             echo "⚠️  Proxy is already running."
         else
-            echo "🚀 Starting Smart Proxy..."
-            nohup python3 "$PROXY_SCRIPT" > "$LOG_FILE" 2>&1 &
-            echo "✅ Started background service."
+            if [ -f "$PROXY_SCRIPT" ]; then
+                echo "🚀 Starting Smart Proxy..."
+                nohup python3 "$PROXY_SCRIPT" > "$HOME/smart_proxy.log" 2>&1 &
+                echo "✅ Started background service."
+            else
+                echo "❌ Proxy script not found: $PROXY_SCRIPT"
+            fi
         fi
         ;;
         
