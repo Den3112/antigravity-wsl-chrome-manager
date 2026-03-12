@@ -1,10 +1,4 @@
-#! /bin/bash
-
-# =============================================================================
-# Antigravity Smart Proxy Manager
-# =============================================================================
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) || exit"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" || exit
 PROXY_SCRIPT="$SCRIPT_DIR/smart_chrome_proxy.py"
 LOG_FILE="/tmp/smart_proxy.log"
 
@@ -31,6 +25,16 @@ case "$1" in
         ;;
         
     start)
+        # 1. Start Router (Port 9222)
+        if pgrep -f "smart_eye_router.py" > /dev/null; then
+            echo "⚠️  Router is already running."
+        else
+            echo "🚀 Starting Smart Router..."
+            nohup python3 "$HOME/antigravity-wsl-chrome-manager/smart_eye_router.py" >> "$HOME/smart_router_debug.log" 2>&1 &
+            echo "✅ Started router service (9222)."
+        fi
+
+        # 2. Start Proxy
         if pgrep -f "smart_chrome_proxy.py" > /dev/null; then
             echo "⚠️  Proxy is already running."
         else
@@ -46,6 +50,7 @@ case "$1" in
         
     stop)
         echo "🛑 Stopping services..."
+        pkill -f "smart_eye_router.py" || true
         pkill -f "smart_chrome_proxy.py" || true
         pkill -f "chrome.*antigravity" 2>/dev/null || true
         echo "✅ All stopped."

@@ -51,6 +51,20 @@ if [ -z "$WINDOWS_IP" ]; then
 fi
 log "Windows IP: $WINDOWS_IP"
 
+# Get Windows Temp directory
+WINDOWS_TEMP=$(powershell.exe -Command "write-host \$env:TEMP" | tr -d '\r')
+# Convert WSL path to Windows path for the proxy script
+WSL_PROXY_PATH=$(realpath "$(dirname "$0")/../windows/wsl_chrome_proxy.py")
+WIN_PROXY_PATH_FOR_CMD="${WINDOWS_TEMP}\\wsl_chrome_proxy.py"
+
+# Copy proxy to Windows if needed or always to be sure
+log "Deploying proxy to Windows: $WIN_PROXY_PATH_FOR_CMD"
+cp "$WSL_PROXY_PATH" "/mnt/c/Users/$(whoami)/AppData/Local/Temp/wsl_chrome_proxy.py" 2>/dev/null || \
+powershell.exe -Command "Copy-Item '$(wslpath -w "$WSL_PROXY_PATH")' -Destination '$WIN_PROXY_PATH_FOR_CMD'"
+
+# Update variables for launch
+WINDOWS_PROXY_PATH="$WIN_PROXY_PATH_FOR_CMD"
+
 # Check if already connected
 if curl -s --connect-timeout 2 "http://$WINDOWS_IP:9223/json/version" > /dev/null 2>&1; then
     echo "✅ Connection to Windows Proxy is active."
@@ -58,8 +72,14 @@ else
     echo "🚀 Connection offline. Launching Windows services..."
     log "Starting Python proxy..."
     powershell.exe -Command "Start-Process '$WINDOWS_PYTHON_EXE' -ArgumentList '$WINDOWS_PROXY_PATH' -WindowStyle Hidden" 2>/dev/null || true
-    log "Starting Chrome..."
-    powershell.exe -Command "Start-Process '$WINDOWS_CHROME_BAT' -WindowStyle Hidden" 2>/dev/null || true
+    # Chrome must be started manually or via other means as we don't have start_chrome.bat here easily
+    # But we can try to find it if it exists
+    if [ -f "$WINDOWS_CHROME_BAT" ]; then
+        log "Starting Chrome via $WINDOWS_CHROME_BAT..."
+        powershell.exe -Command "Start-Process '$WINDOWS_CHROME_BAT' -WindowStyle Hidden" 2>/dev/null || true
+    else
+        log "Windows Chrome BAT not found at $WINDOWS_CHROME_BAT, skipping auto-launch."
+    fi
     
     # Wait for services to start
     echo "⏳ Waiting for services to start..."

@@ -14,14 +14,16 @@ Forwards to: 127.0.0.1:9222
 import socket
 import threading
 import sys
+import os
 import signal
 import argparse
 
 # Configuration
-LISTEN_HOST = '0.0.0.0'
-LISTEN_PORT = 9223
-TARGET_HOST = '127.0.0.1'
-TARGET_PORT = 9222
+# Configuration (can be overridden by environment variables)
+LISTEN_HOST = os.environ.get('PROXY_LISTEN_HOST', '0.0.0.0')
+LISTEN_PORT = int(os.environ.get('PROXY_LISTEN_PORT', 9223))
+TARGET_HOST = os.environ.get('PROXY_TARGET_HOST', '127.0.0.1')
+TARGET_PORT = int(os.environ.get('PROXY_TARGET_PORT', 9222))
 BUFFER_SIZE = 65536
 
 VERBOSE = False
