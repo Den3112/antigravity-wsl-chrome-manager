@@ -1,30 +1,20 @@
 ---
-name: 🐛 Bug Report
-about: Report a connection issue or bug
+name: Bug report
+about: Create a report to help us improve
 title: '[BUG] '
 labels: bug
-assignees: ''
+assignees: Den3112
 ---
 
-## 🐛 Bug Description
-A clear description of the bug.
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-## 📋 Steps to Reproduce
-1. Run `...`
-2. See error
+**To Reproduce**
+Steps to reproduce the behavior.
 
-## ❌ Expected vs Actual
-**Expected:** What should happen
-**Actual:** What actually happens
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-## 🖥️ Environment
-- OS: Windows 10/11
-- WSL Version: WSL 2
-- Chrome Version: 
-- Antivirus: Bitdefender / Kaspersky / None
-
-## 📄 Logs
-```
-Paste verbose output here:
-./wsl/start_bridge.sh --verbose
-```
+**Environment info:**
+- OS:
+- Version:

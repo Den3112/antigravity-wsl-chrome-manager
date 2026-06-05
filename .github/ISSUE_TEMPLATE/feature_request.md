@@ -1,16 +1,16 @@
 ---
-name: ✨ Feature Request
-about: Suggest an improvement
+name: Feature request
+about: Suggest an idea for this project
 title: '[FEATURE] '
 labels: enhancement
-assignees: ''
+assignees: Den3112
 ---
 
-## ✨ Feature Description
-What would you like to see added?
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is.
 
-## 🎯 Use Case
-Why is this needed? What problem does it solve?
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
 
-## 💡 Proposed Solution
-How would you implement this?
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
