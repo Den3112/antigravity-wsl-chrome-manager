@@ -17,3 +17,9 @@ ENV/
 .gemini/
 /tmp/ag_chrome_registry.json
 /home/creator/smart_router_debug.log
+
+# Added during automated cleanup
+node_modules/
+.env
+.DS_Store
+.vscode/
